@@ -3,6 +3,9 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 import sys
 from PyQt5.uic import loadUiType
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.figure import Figure
+import numpy as np
 
 ui, _ = loadUiType('sismotekno.ui')
 
@@ -14,6 +17,8 @@ class MainApp(QMainWindow, ui):
 
     def initUI(self):
         self.updateLogo(False) 
+        self.initPlot()
+
 
         self.setStyleSheet("QMainWindow {background-color: #ADD8E6;}")  # Light blue background
         self.pushButton_3.setStyleSheet("""
@@ -130,6 +135,24 @@ class MainApp(QMainWindow, ui):
 
         self.warningLogo.setPixmap(pixmap)  # Replace 'logoLabel' with the actual name of your QLabel
         self.warningLogo.setScaledContents(True)  # Ensure the logo fits the label
+
+
+    def initPlot(self):
+        # Create the Matplotlib figure and axis
+        fig = Figure()
+        ax = fig.add_subplot(111)
+        x = np.linspace(0, 10, 100)
+        y = np.sin(x)
+        ax.plot(x, y, label='Sine Wave')
+        ax.set_title('Example Sine Wave Plot')
+        ax.set_xlabel('X axis')
+        ax.set_ylabel('Y axis')
+        ax.legend()
+        ax.grid(True)
+
+        # Create a canvas and add it to your main window
+        self.canvas = FigureCanvas(fig)
+        self.plotLayout.addWidget(self.canvas)  # Ensure you have a layout called 'plotLayout' in your Qt Designer where the plot should be added
 
 def main():
     app = QApplication(sys.argv)

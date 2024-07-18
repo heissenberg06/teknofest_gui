@@ -267,15 +267,16 @@
      <string>B1: 12V 6A</string>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="graphicsView">
+   <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>590</x>
-      <y>30</y>
-      <width>461</width>
-      <height>341</height>
+      <x>570</x>
+      <y>50</y>
+      <width>481</width>
+      <height>351</height>
      </rect>
     </property>
+    <layout class="QGridLayout" name="plotLayout"/>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
